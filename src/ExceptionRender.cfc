@@ -1,7 +1,7 @@
 <cfcomponent output="false">
 
 	<cffunction name="init" output="false" access="public" returntype="any">
-		<cfset this.version = "1.0" />
+		<cfset this.version = "1.0,1.1" />
 		<cfreturn this />
 	</cffunction>
 	
@@ -15,12 +15,17 @@
 			var loc = {
 				url = ReplaceList(URLFor(argumentCollection=arguments), "/index.cfm,/rewrite.cfm", ",")
 			};
-		
+			
+			request.exceptionRender = Duplicate(request.wheels.params);
 			request.cgi.path_info = loc.url;
-		
-			StructDelete(url, "action");
-			StructDelete(url, "controller");
-			StructDelete(url, "route");
+			
+			loc.structDeleteItems = { action="action", controller="controller", route="route" };
+			
+			for (loc.item in loc.structDeleteItems) {
+			
+				StructDelete(url, loc.structDeleteItems[loc.item], false);
+				StructDelete(form, loc.structDeleteItems[loc.item], false);
+			}
 		</cfscript>
 		<cfreturn application.wheels.dispatch.$request() />
 	</cffunction>
