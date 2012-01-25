@@ -1,7 +1,7 @@
 <cfcomponent output="false">
 
 	<cffunction name="init" output="false" access="public" returntype="any">
-		<cfset this.version = "1.0,1.1,1.2" />
+		<cfset this.version = "1.0,1.1" />
 		<cfreturn this />
 	</cffunction>
 	
@@ -44,7 +44,6 @@
 	
 	<cffunction name="sendExceptionEmail" returntype="void" access="public" output="false" mixin="application,dispatch">
 		<cfargument name="exception" type="any" required="true">
-		<cfargument name="eventName" type="any" required="true">
 		<cfscript>	
 			var loc = {};
 					
