@@ -46,25 +46,25 @@
 	switch (arguments.exception.cause.type)
 	{
 		// set the proper header and render the notFound action
-		case "MyCms.PageNotFound":
-			$header(statusCode=404, statusText="Page Not Found");
-			WriteOutput(exceptionRender(route="exceptions", action="notFound", exception=arguments));
+		case &quot;MyCms.PageNotFound&quot;:
+			$header(statusCode=404, statusText=&quot;Page Not Found&quot;);
+			WriteOutput(exceptionRender(route=&quot;exceptions&quot;, action=&quot;notFound&quot;, exception=arguments));
 			break;
 		
 		// show the content login page
-		case "MyCms.LoginRequired":
-			WriteOutput(exceptionRender(route="sessions", action="new", exception=arguments));
+		case &quot;MyCms.LoginRequired&quot;:
+			WriteOutput(exceptionRender(route=&quot;sessions&quot;, action=&quot;new&quot;, exception=arguments));
 			break;
 
 		// show the access denied page
-		case "MyCms.AccessDenied":
-			$header(statusCode=403, statusText="Access Denied");
-			WriteOutput(exceptionRender(route="exceptions", action="accessDenied", exception=arguments));
+		case &quot;MyCms.AccessDenied&quot;:
+			$header(statusCode=403, statusText=&quot;Access Denied&quot;);
+			WriteOutput(exceptionRender(route=&quot;exceptions&quot;, action=&quot;accessDenied&quot;, exception=arguments));
 			break;
 
 		default:
 			sendExceptionEmail(argumentCollection=arguments);
-			WriteOutput(exceptionRender(route="exceptions", action="internalServerError", exception=arguments)); 
+			WriteOutput(exceptionRender(route=&quot;exceptions&quot;, action=&quot;internalServerError&quot;, exception=arguments)); 
 			break;
 	}
 &lt;/cfscript&gt;</pre>
@@ -77,7 +77,7 @@
 			page = model(&quot;page&quot;).findByUrl(cgi.path_info);
 
 			if (!IsObject(page))
-				Throw(type="MyCms.PageNotFound", message="The page you were looking for could not be found.");
+				Throw(type=&quot;MyCms.PageNotFound&quot;, message=&quot;The page you were looking for could not be found.&quot;);
 		&lt;/cfscript&gt;
 	&lt;/cffunction&gt;
 
